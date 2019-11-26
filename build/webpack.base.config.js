@@ -1,5 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
+const {CheckerPlugin} = require('awesome-typescript-loader')
 module.exports = {
     entry: './src/index.ts',
     output: {
@@ -13,7 +13,10 @@ module.exports = {
             {
                 test: /\.tsx?$/i,
                 use: [{
-                    loader: 'ts-loader'
+                    loader: 'ts-loader',
+                    options: {
+                        transpileOnly:false
+                    }
                 }],
                 exclude: /node_modules/
             }
@@ -22,7 +25,8 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/tpl/index.html'
-        })
+        }),
+        new CheckerPlugin()
     ]
     
 }
