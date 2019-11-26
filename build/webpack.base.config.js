@@ -24,4 +24,5 @@ module.exports = {
             template: './src/tpl/index.html'
         })
     ]
+    
 }
