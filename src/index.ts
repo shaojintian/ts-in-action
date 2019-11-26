@@ -9,14 +9,14 @@
 
 
 import Vue from 'vue'
-
+import hello from './components/hello.vue'
 
 let app1 = new Vue({
     el:'.app',
-    data: {
-        name:"Ts@sjr"
+    components: {
+        hello
     },
-    template:`<h1>hello {{name}}</h1>`
+    template:`<hello/>`
 })
 
 
