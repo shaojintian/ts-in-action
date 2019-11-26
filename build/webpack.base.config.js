@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {CheckerPlugin} = require('awesome-typescript-loader')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 module.exports = {
     entry: './src/index.ts',
     output: {
@@ -14,14 +15,27 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            },
+            {
                 test: /\.tsx?$/i,
                 use: [{
                     loader: 'ts-loader',
                     options: {
-                        transpileOnly:false
+                        transpileOnly:false,
+                        appendTsSuffixTo:[/\.vue$/]
                     }
                 }],
                 exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    'vue-style-loader',
+                    'css-loader'
+                        
+                ]
             }
         ]
     },
@@ -29,7 +43,8 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/tpl/index.html'
         }),
-        new CheckerPlugin()
+        new CheckerPlugin(),
+        new VueLoaderPlugin()
     ]
     
 }
